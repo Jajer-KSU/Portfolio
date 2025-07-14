@@ -43,6 +43,7 @@ const fileSystem = {
         Documents: {},
         Downloads: {},
         Pictures: {},
+        '.hint': 'In case you forget the password, check the stylesheet, nobody will ever look there.'
     }
     
     },
@@ -58,12 +59,19 @@ const fileSystem = {
 
 // ls command
 commands.ls = function(path = null) {
+    // prevent root
     if (path === '/root' && !isRoot) {
         return typewriter(this, 'Permission Denied', 20);
     }
     const dir = getDirPointer();
-    const lists= Object.keys(dir).join('\n');
-    typewriter(this , lists, 20)
+
+    
+    const showHidden = (path || '').trim() === '-la';
+
+    // do not display .hint unless -la is used
+    const files= Object.keys(dir).filter(name => showHidden || !name.startsWith('.'));
+
+    typewriter(this , files.join('\n'), 20);
 };
 
 // cd command
