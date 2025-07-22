@@ -24,11 +24,28 @@
                     --size: 1.4;
                 }
             }
+
+        #flag-tracker {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: lime;
+            padding: 8px 12px;
+            font-family: monospace;
+            font-size: 14px;
+            border-radius: 4px;
+            z-index: 9999;
+        }
+</style>
+
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet" />
     </head>
     <body>
+        <div id = "flag-tracker">Flags found 0/5</div>
+
         <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
         <script src="https://cdn.jsdelivr.net/gh/jcubic/static/js/wcwidth.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
@@ -39,4 +56,5 @@
 
         <script src="./main.js"></script>
     </body>
+    
 </html>

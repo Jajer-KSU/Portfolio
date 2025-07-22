@@ -183,6 +183,23 @@ commands.exit = function() {
     };
 };
 
+// ps command
+commands.ps = function() {
+    const output = [
+        'PID   TTY          TIME      CMD',
+        '1135  pts/0        00:00:00  bash',
+        '1292  pts/0        00:00:01  su',
+        '1430  pts/0        00:00:02  nano',
+        '1993  pts/0        00:00:00  ./flag_watcher 🕵️'
+    ];
+    typewriter(this, output.join('\n'), 20);
+};
+fileSystem['/'].proc = {
+    '1993': {
+        'flag.txt': 'CTF{watch_the_processes}'
+    }
+};
+
 
 
 // pwd command - shoe current working directory path
@@ -192,6 +209,42 @@ commands.pwd = function() {
     const path = '/' + currentDir.join('/');
     // show ~ when in home path
     typewriter(this, path, 20);
+};
+
+// flag tracker and submit button -------------------------
+let foundFlags = new Set();
+const validFlags = new Set([
+    'CTF{desktop_flag_discovery}',
+    'FLAG{R00T_4CC3SS}', // not working - fix tomorrow
+]);
+const totalFlags = 5;
+
+// updates flag tracker container
+function updateFlagTracker() {
+    $('#flag-tracker').text(`Flags Found: ${foundFlags.size}/${totalFlags}`);
+}
+
+// submit command for flags
+commands.submit = function(input) {
+    // display command function if no parameters are specified
+    if (!input || !input.trim()) {
+        return typewriter(this, 'Usage: submit CTF{your_flag_here}', 20);
+    }
+    
+    const flag = input.trim();
+    // validate and check for duplicates
+    if (validFlags.has(flag)) {
+        if (!foundFlags.has(flag)) {
+            foundFlags.add(flag);
+            updateFlagTracker();
+            return typewriter(this, `${flag}\nNice! You have found ${foundFlags.size}/${totalFlags} flags!`, 20);
+
+        } else {
+            return typewriter(this, 'Flag has already been submitted!', 20);
+        }
+    }
+
+    return typewriter(this, 'Not a valid flag. Maybe check the format?', 20);
 };
 
 
@@ -212,8 +265,8 @@ const term = $('body').terminal(commands, {
 
 function ready() {
     const seed = rand(256);
-    term.echo(() => rainbow(render('WELCOME'), seed))
-    term.echo('[[;#0ff;]\nWelcome to my CTF-Challenge, there are 5 total flags scattered throughout my website and this terminal. Good luck and I hope you have fun!.\nType "help" to begin.]\n',{
+    term.echo(() => rainbow(render('WELCOME'), seed));
+    term.echo('[[;#0ff;]Welcome to my CTF-Challenge, there are 5 total flags scattered throughout my website and this terminal. Good luck and I hope you have fun!.\nType "help" to begin.]\n',{
         typing: true,
         delay: 20
     })
@@ -230,12 +283,19 @@ function rainbow(string, seed) {
 
 function render(text) {
     const cols = term.cols();
-    return trim(figlet.textSync(text, {
+    const lines = figlet.textSync(text, {
         font: font,
         width: cols,
         whitespaceBreak: true
-    }));
+    }).split('\n');
+
+    // courtesy of github copilot on how to center Welcome message
+    return lines.map(line => {
+        const padding = Math.floor((cols - line.length) / 2);
+        return ' '.repeat(Math.max(padding, 0)) + line;
+    }).join('\n');
 }
+
 
 function trim(str) {
     return str.replace(/[\n\s]+$/, '');
