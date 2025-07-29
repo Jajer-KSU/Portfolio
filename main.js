@@ -10,10 +10,6 @@ const commands = {
     about() {
         const msg = [
         '',
-        '👨‍💻Jaydon Humphries is a cybersecurity student passionate about ethical hacking,',
-        'penetration testing, and building secure systems.',
-        'Currently studying at Kennesaw State University and working on hands-on CTF challenges.',
-        '',
         'Type "credits" to see the tools powering this terminal.'
         ].join('\n');
 
@@ -190,7 +186,7 @@ commands.ps = function() {
         '1135  pts/0        00:00:00  bash',
         '1292  pts/0        00:00:01  su',
         '1430  pts/0        00:00:02  nano',
-        '1993  pts/0        00:00:00  ./flag_watcher 🕵️'
+        '1993  pts/0        00:00:00  Q1RGe3dhdGNoX3RoZV9wcm9jZXNzZXN9'
     ];
     typewriter(this, output.join('\n'), 20);
 };
@@ -215,9 +211,10 @@ commands.pwd = function() {
 let foundFlags = new Set();
 const validFlags = new Set([
     'CTF{desktop_flag_discovery}',
-    'FLAG{R00T_4CC3SS}', // not working - fix tomorrow
+    'FLAG{R00T_4CC3SS}', 
+    'CTF{watch_the_processes}'
 ]);
-const totalFlags = 5;
+const totalFlags = 3;
 
 // updates flag tracker container
 function updateFlagTracker() {
@@ -266,7 +263,7 @@ const term = $('body').terminal(commands, {
 function ready() {
     const seed = rand(256);
     term.echo(() => rainbow(render('WELCOME'), seed));
-    term.echo('[[;#0ff;]Welcome to my CTF-Challenge, there are 5 total flags scattered throughout my website and this terminal. Good luck and I hope you have fun!.\nType "help" to begin.]\n',{
+    term.echo('[[;#0ff;]Welcome to my CTF-Challenge, there are 3 total flags. Good luck and I hope you have fun!.\nType "help" to begin.]\n',{
         typing: true,
         delay: 20
     })
@@ -374,6 +371,4 @@ async function typewriter(term, text, delay = 30) {
         await new Promise(resolve => setTimeout(resolve, delay));
     }
 }
-
-// no cheating
 

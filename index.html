@@ -14,11 +14,12 @@
         <!-- NAVBAR -->
         <nav class="navbar" id="mainNavbar">
             <div class="nav-left">
+                <a href="#intro" class="logo-box">JH</a>
                 <a href="#aboutMe" class="nav-links-left">About Me</a>
                 <a href="#skills" class="nav-links-left">Skills</a>
                 <a href="#coursework" class="nav-links-left">Coursework</a>
-                <a href="ctfchallenge.html" class="nav-links-left" target="_blank" rel="no-referrer noopener">CTF Challenge</a>
-                <a href="#references" class="nav-links-left">References</a>
+                <a href="ctfchallenge.html" class="nav-links-left" target="_blank" rel="noreferrer noopener">CTF Challenge</a>
+                <!-- <a href="#references" class="nav-links-left">References</a> -->
             </div>
             <!-- NAVBAR-RIGHT -->
             <div class="nav-right">
@@ -43,7 +44,7 @@
         
         <main>
             <!-- TOP-->
-            <div class="intro">
+            <div class="intro" id="intro">
                 <img src="imgs/me.jpg" alt="Jaydon Humphries" class="profile-pic">
                 <h1>Hey, I'm Jaydon Humphries &#128075;. Thank you for checking out my portfolio! Here you can find some more information about me, including a custom CTF challenge made by me for you to check out!</h2>
             </div>
@@ -93,7 +94,7 @@
                             </ul>
                         <h3>Soft Skills <i class="fas fa-handshake"></i></h3>
                             <ul>
-                                <li>Adaptability and willingness to learn new technologies</li>
+                                <li>Adaptability and willingness to learn new concepts</li>
                                 <li>Strong problem-solving skills, ability to work under pressure</li>
                                 <li>Excellent communication skills, both written and verbal</li>
                                 <li>Ability to work collaboratively in a team environment</li>
@@ -104,11 +105,34 @@
             </section>
             <section class="coursework" id="coursework">
                 <h2>Coursework & Projects</h2>
-                <div class="coursework-txt">
-                    <h3> Evolution of HTTP Web-Page</h3>
-                    <div class="HTTP Website Preview">
-
-                    </div>
+                <div class="projects">
+                    <a href="https://jajer-ksu.github.io/Evolution-of-HTTP/" target="_blank" rel="noopener noreferrer" class="project-link">
+                        <div class="project">
+                            <img src="imgs/Evolution.png" alt="Evolution of HTTP Website">
+                            <h3>Evolution of HTTP Website</h3>
+                            <p>Information regarding HTTP made into a website.</p>                            
+                        </div>
+                    </a>
+                    <a href="pdf/Firewall_Configuration_Best_Practices.pdf" target="_blank" rel="noopener noreferrer" class="project-link">
+                        <div class="project">
+                            <img src="imgs/Firewalls.png" alt="Firewall Configuration Best Practices">
+                            <h3>Firewall Configuration</h3>
+                            <p>Research paper discussing policy design and implementation</p>
+                        </div>
+                    </a>
+                    <a href="pdf/Project Charter.pdf" target="_blank" rel="noopener noreferrer" class="project-link">
+                        <div class="project">
+                            <img src="imgs/Project Charter.png" alt="Project Charter">
+                            <h3>AV Project Charter</h3>
+                            <p>Group-made project charter for an AV solution</p>
+                        </div>
+                    </a>
+                    <a href="https://jajer.dev/ctfchallenge.html" target="_blank" rel="noopener noreferrer" class="project-link">
+                        <div class="project">
+                            <img src="imgs/CTF.png" alt="CTF Challenge">
+                            <h3>CTF Challenge</h3>
+                            <p>Custom CTF challenge using jQuery Terminal with updated flag tracker.</p>
+                        </div>
                 </div>
             </section>
         </main>
