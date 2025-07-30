@@ -9,23 +9,23 @@
 @keyframes pageFadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 /* run only once on load */
-.page-wrapper {
+body.portfolio.page-loaded {
   animation: pageFadeIn 0.8s ease-out both;
 }
-
-html, body {
-  overflow-x: hidden;
+html{
   scroll-behavior: smooth !important;
 }
+body {
+  position: relative;
+}
+
 
 .portfolio {
   font-family: 'Poppins', sans-serif;
@@ -196,7 +196,7 @@ h2 {
   color: var(--secondary-color);
 }
 #aboutMe {
-  scroll-margin-top: 120px;
+  scroll-margin-top: 100px;
 }
 /* skills */
 .skills {
@@ -536,7 +536,6 @@ footer {
   text-align: center;
   padding: 20px;
   font-size: 16px;
-  background-color: var(--primary-color);
 }
 
 footer p {
