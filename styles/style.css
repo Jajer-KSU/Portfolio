@@ -18,17 +18,18 @@
 }
 
 /* run only once on load */
-body.portfolio.page-loaded {
+.page-wrapper {
   animation: pageFadeIn 0.8s ease-out both;
 }
 
-html {
+html, body {
+  overflow-x: hidden;
   scroll-behavior: smooth !important;
 }
+
 .portfolio {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  overflow-x: hidden;
   padding: 0;
   color: var(--secondary-color);
 }
@@ -318,9 +319,7 @@ h2 {
   width: 100%;
 }
 
-#menu-btn {
-  display: none;
-}
+
 
 .menu-toggle-label {
   font-size: 24px;
@@ -328,13 +327,15 @@ h2 {
   display: none;
 }
 
+#menu-btn {
+  display: none;
+}
 
 
 /* Phones (max width: 600px) */
 @media (max-width: 600px) {
-  html, body, .portfolio {
+  html, body {
   overflow-x: hidden;
-  overflow-y: auto;
 }
   nav#mainNavbar {
     background-color: transparent;
@@ -345,10 +346,10 @@ h2 {
   }
   
   #menu-btn {
-    position: fixed;
+    position: fixed !important;
     top: 20px;
     left: 20px;
-    z-index: 10001; /* make sure it's above all overlays */
+    z-index: 10001 !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -356,7 +357,7 @@ h2 {
     font-weight: 900;
     background-color: rgb(245, 243, 242);
     color: black;
-    border: none;
+    border: 2px solid black;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -367,8 +368,8 @@ h2 {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
@@ -512,9 +513,6 @@ h2 {
     gap: 20px;
   }
 }
-
-
-
 
 /* menu animations */
 .menu-links {

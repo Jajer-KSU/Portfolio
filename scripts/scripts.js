@@ -38,7 +38,7 @@ document.querySelectorAll(".project").forEach((el) => {
 });
 
 // menu animations
-// Toggle full screen menu
+// make menu cover entire screen
 const menuBtn = document.getElementById('menu-btn');
 const menu = document.querySelector('.menu-links');
 const navLinks = document.querySelectorAll('.nav-links-left, .nav-links-right');
@@ -51,7 +51,7 @@ menuBtn.addEventListener('click', () => {
   menuOpen = menu.classList.contains('active');
 });
 
-// Close menu when link is clicked
+// close menu on link click
 navLinks.forEach(link => {
   link.addEventListener('click', () => {
     if (menuOpen) {
@@ -62,7 +62,7 @@ navLinks.forEach(link => {
   });
 });
 
-// Optional: close on scroll
+// close on scroll
 window.addEventListener('scroll', () => {
   if (menuOpen) {
     menu.classList.remove('active');
