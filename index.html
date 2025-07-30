@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portfolio - Welcome</title>
         <script src="scripts/scripts.js" defer></script>
         <link rel="stylesheet" href="styles/style.css">
@@ -11,34 +11,42 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body class="portfolio">
+        <!-- Hidden menu toggle for Mobile -->
+        <button id="menu-btn" class="menu-toggle-label" aria-label="Open Menu">
+            <i class="fas fa-bars"></i>
+        </button>
         <!-- NAVBAR -->
         <nav class="navbar" id="mainNavbar">
-            <div class="nav-left">
-                <a href="#intro" class="logo-box">JH</a>
-                <a href="#aboutMe" class="nav-links-left">About Me</a>
-                <a href="#skills" class="nav-links-left">Skills</a>
-                <a href="#coursework" class="nav-links-left">Coursework</a>
-                <a href="ctfchallenge.html" class="nav-links-left" target="_blank" rel="noreferrer noopener">CTF Challenge</a>
-                <!-- <a href="#references" class="nav-links-left">References</a> -->
-            </div>
-            <!-- NAVBAR-RIGHT -->
-            <div class="nav-right">
-                <a href="pdf/Jaydon Humphries 2025 Resume.pdf" class="nav-links-right" target="_blank" rel="noopener noreferer">
-                    <i class="fas fa-file-alt" style="color: rgb(11, 107, 176)"></i>
-                    <span class="right-txt">Resume</span>
-                </a>
-                <a href="https://github.com/Jajer-KSU" class="nav-links-right" target=_blank rel="noopener noreferer">
-                    <i class="fab fa-github" style="color: rgb(144, 0, 176)"></i>
-                    <span class="right-txt">GitHub</span>
-                </a>
-                <a href="https://app.hackthebox.com/profile/1803847" class="nav-links-right" target=_blank rel="noopener noreferer">
-                    <i class="fas fa-cube" style="color: rgb(52, 194, 39)"></i>
-                    <span class="right-txt">Hack The Box</span>
-                </a>
-                <a href="mailto:jayhumphries11@gmail.com" class="nav-links-right">
-                    <i class="fas fa-envelope" style="color: rgb(150, 150, 150)"></i>
-                    <span class="right-txt">Contact Me</span>
-                </a>
+            <div class="menu-links">
+                <a href="#intro" class="logo-box mobile-logo">JH</a>
+                <!-- NAVBAR-LEFT -->
+                <div class="nav-left">
+                    <a href="#aboutMe" class="nav-links-left">About Me</a>
+                    <a href="#skills" class="nav-links-left">Skills</a>
+                    <a href="#coursework" class="nav-links-left">Coursework</a>
+                    <a href="ctfchallenge.html" class="nav-links-left" target="_blank" rel="noreferrer noopener">CTF Challenge</a>
+                    <!-- <a href="#references" class="nav-links-left">References</a> -->
+                </div>
+
+                <!-- NAVBAR-RIGHT -->
+                <div class="nav-right">
+                    <a href="pdf/Jaydon Humphries 2025 Resume.pdf" class="nav-links-right" target="_blank" rel="noopener noreferer">
+                        <i class="fas fa-file-alt" style="color: rgb(11, 107, 176)"></i>
+                        <span class="right-txt">Resume</span>
+                    </a>
+                    <a href="https://github.com/Jajer-KSU" class="nav-links-right" target=_blank rel="noopener noreferer">
+                        <i class="fab fa-github" style="color: rgb(144, 0, 176)"></i>
+                        <span class="right-txt">GitHub</span>
+                    </a>
+                    <a href="https://app.hackthebox.com/profile/1803847" class="nav-links-right" target=_blank rel="noopener noreferer">
+                        <i class="fas fa-cube" style="color: rgb(52, 194, 39)"></i>
+                        <span class="right-txt">Hack The Box</span>
+                    </a>
+                    <a href="mailto:jayhumphries11@gmail.com" class="nav-links-right">
+                        <i class="fas fa-envelope" style="color: rgb(150, 150, 150)"></i>
+                        <span class="right-txt">Contact Me</span>
+                    </a>
+                </div>
             </div>
         </nav>
         
@@ -137,7 +145,7 @@
             </section>
         </main>
         <footer>
-            <p>&copy; 2023 My Portfolio</p>
+            <p>&copy; Thank you for taking the time to look over my work, I spent countless hours making this website and I am very proud of it.</p>
         </footer>
     </body>
 </html>
