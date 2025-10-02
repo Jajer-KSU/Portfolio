@@ -60,9 +60,9 @@ nav {
 }
 .nav-right {
   display: flex;
-  gap: 16px;
   justify-content: flex-end;
   flex-grow: 1;
+  gap: 20px;
 }
 
 .menu-links {
@@ -110,32 +110,64 @@ nav {
   border-radius: 6px;
 }
 /* navbar-right */
-.nav-links-right {
+.nav-links-right{
   position: relative;
-  color: var(--secondary-color);
+  display: inline-flex;
+  align-items: flex-end;
   text-decoration: none;
-  margin: 0 8px;
-  font-weight: 700;
-  font-size: 17px;
+  color: var(--secondary-color);
+  white-space: nowrap;
+  font-weight: 500;
+  line-height: 17px;
 }
-.nav-links-right::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 2px;
+
+/* icon */
+.nav-links-right i{ 
+  font-size:1.4rem; 
+  flex-shrink: 0; 
+  line-height: 1; 
+  transition: transform .18s; 
+  align-items: flex-end;
+}
+
+/* label: collapsed by default */
+.nav-links-right .right-txt{
+  display:inline-flex;
+  max-width:0;     
+  opacity:0;
+  margin-left:0;
+  overflow:hidden;
+  transition:max-width .28s ease, opacity .2s ease, margin-left .2s ease;
+  align-items: flex-end;
+}
+
+/* hover effects */
+.nav-links-right:hover i { 
+  transform:scale(1.1); 
+}
+.nav-links-right:hover .right-txt{
+  max-width:var(--w, 10ch);
+  opacity:1;
+  margin-left:6px;
+}
+
+.nav-links-right::after{
+  content: ''; 
+  position: absolute; 
+  left:0; bottom:-4px; 
+  height: 2px; 
   width: 0;
-  background-color: black;
-  transition: all 0.3s ease;
+  background: var(--secondary-color); 
+  transition: width .28s ease;
 }
-.nav-links-right:hover::after {
-  width: 100%
+.nav-links-right:hover::after{ 
+  width: 100%; 
 }
+
 .nav-links-left,
 .nav-links-right {
   position: relative;
-  display: inline-block;
+
   white-space: nowrap;
 }
 
@@ -178,7 +210,7 @@ h2 {
 }
 /* about */
 .about {
-  background: var(--primary-color);
+  
   padding: 40px 20px;
   margin: 80px auto;
   height: 500px;
@@ -200,6 +232,7 @@ h2 {
 }
 /* skills */
 .skills {
+  background: var(--primary-color);
   padding: 40px 20px;
   margin: 80px auto;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -218,57 +251,60 @@ h2 {
   scroll-margin-top: 100px;
 }
 
-/* coursework */
+/* === Coursework Carousel === */
+
 .coursework {
   background: var(--primary-color);
   padding: 40px 20px;
   margin: 80px auto;
-  height: 500px;
   border-radius: 6px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  text-align: center;
 }
+
 .coursework h2 {
   font-size: 40px;
   margin-bottom: 40px;
   font-weight: 800;
 }
-.projects {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
+
+/* Project cards */
 .project-link {
   text-decoration: none;
   color: var(--secondary-color);
   transition: transform 0.3s ease;
   border-radius: 15px;
+  pointer-events: auto;
 }
 .project-link:hover {
   transform: scale(1.03);
 }
+
 .project {
   background: linear-gradient(to top, #a0eec0, #ffffff);
   color: #000;
   width: 100%;
-  max-width: 375px;
+  width: 300px;
+  height: 350px;
   padding: 20px;
   border-radius: 15px;
   text-align: center;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-40px);
-  transition: all 0.6s ease-out;
+  pointer-events: auto;
+  opacity: 1; /* Remove animation delay flicker */
+  transform: translateY(0); /* Default position */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .project.animate {
-  opacity:1;
+  opacity: 1;
   transform: translateY(0);
 }
+
 .project-link:nth-child(2) .project {
   background: linear-gradient(to top, #c2b2f0, #ffffff);
 }
-
 .project-link:nth-child(3) .project {
   background: linear-gradient(to top, #99c8ff, #ffffff);
 }
@@ -280,6 +316,7 @@ h2 {
   width: 100%;
   border-radius: 10px;
   margin-bottom: 15px;
+  aspect-ratio: 16/9;
 }
 
 .project h3 {
@@ -287,13 +324,83 @@ h2 {
   font-weight: 700;
   margin: 10px 0;
 }
-
 .project p {
   font-size: 1rem;
   font-weight: 600;
 }
-#coursework {
-  scroll-margin-top: 100px;
+
+/* === Carousel Layout === */
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 100%;
+  padding: 20px;
+  overflow: visible;
+  overflow-x: hidden;
+  margin-top: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Arrows */
+.arrow {
+  font-size: 2.5rem;
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  cursor: pointer;
+  padding: 0 20px;
+  transition: color 0.3s ease;
+  z-index: 2;
+}
+.arrow:hover {
+  color: var(--hightlight);
+}
+.arrow.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.arrow.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Dots */
+.slider-dots {
+  text-align: center;
+  margin-top: 20px;
+}
+.slider-dots button {
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  background: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.slider-dots button.active {
+  opacity: 1;
 }
 
 /* Responsive Design */
@@ -468,8 +575,16 @@ h2 {
   padding: 10px 16px !important;
   box-shadow: none !important;
   }
-
-
+  .nav-links-right .right-txt {
+    opacity: 1 !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    overflow: visible !important;
+    transition: none !important;
+  }
+  /* Kill the underline/hover animations on mobile */
+  .nav-links-right::after { display: none !important; }
+  .nav-links-right:hover { background: transparent; }
   h1 {
     font-size: 22px;
     line-height: 30px;
@@ -512,7 +627,28 @@ h2 {
   .projects {
     gap: 20px;
   }
+   /* unwrap the grouping wrapper so each project becomes a slide */
+  /* Treat each project as a slide; ignore the page wrapper */
+  .carousel-slide { display: contents; }  /* key line */
+
+  /* The track already uses display:flex in your CSS; keep it that way */
+  .carousel-track { display: flex; touch-action: pan-y; }
+
+  /* Each project fills the viewport width */
+  .project-link {
+    flex: 0 0 100%;
+    box-sizing: border-box;    /* padding counted in 100% */
+    padding: 0;                /* avoid widening the slide */
+    display: flex;
+    justify-content: center;
+  }
+  .carousel-container .arrow {
+    display: none !important;
+  }
+  /* Dots row tweaks (optional) */
+  .slider-dots { display: flex; justify-content: center; gap: 8px; }
 }
+
 
 /* menu animations */
 .menu-links {

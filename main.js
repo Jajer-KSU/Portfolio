@@ -263,7 +263,7 @@ const term = $('body').terminal(commands, {
 function ready() {
     const seed = rand(256);
     term.echo(() => rainbow(render('WELCOME'), seed));
-    term.echo('[[;#0ff;]Welcome to my CTF-Challenge, there are 3 total flags. Good luck and I hope you have fun!.\nType "help" to begin.]\n',{
+    term.echo('[[;#0ff;]Welcome to my Capture the Flag Challenge. The goal is to navigate through this simulated system and collect hidden flags. Good luck and I hope you have fun!.\nThis project was made using jQuery Terminal. Type "credits" to view documentation.\nTo get started, type "help" into the terminal to view a list of commands.]\n',{
         typing: true,
         delay: 20
     })
