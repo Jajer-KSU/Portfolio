@@ -79,20 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const prevBtn   = document.getElementById('prev-btn');
   const nextBtn   = document.getElementById('next-btn');
   const dotsWrap  = document.getElementById('carousel-dots');
+
+  // breakpoints / input detection
   const mqMobile  = window.matchMedia('(max-width: 600px)');
+  const mqCoarse  = window.matchMedia('(pointer: coarse)'); // touch pointer
 
   let slides = [];
   let index  = 0;
   let slideW = 0;
+
+  // swipe state
   let dragging = false, startX = 0, dx = 0;
+  let swipeAttached = false;
+
+  const swipeAllowed = () => mqMobile.matches || mqCoarse.matches;
 
   function collectSlides() {
-    slides = Array.from(track.querySelectorAll(
-      mqMobile.matches ? '.project-link' : '.carousel-slide'
-    ));
+    slides = Array.from(
+      track.querySelectorAll(mqMobile.matches ? '.project-link' : '.carousel-slide')
+    );
   }
 
-  // NEW: always measure the real width of one slide
   function getSlideWidth() {
     const el = slides[0];
     return el ? Math.round(el.getBoundingClientRect().width) : 0;
@@ -130,28 +137,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setSizes() {
     collectSlides();
-    slideW = getSlideWidth();              // <-- replaced
+    slideW = getSlideWidth();
     goTo(index, false);
     buildDots();
     updateArrows();
   }
 
-  // Buttons
+  // ---- Buttons (work on both desktop & mobile) ----
   prevBtn.addEventListener('click', () => goTo(index - 1, true));
   nextBtn.addEventListener('click', () => goTo(index + 1, true));
 
-  // Swipe
-  track.addEventListener('pointerdown', (e) => {
-    dragging = true; startX = e.clientX; dx = 0;
+  // ---- Swipe (touch only) ----
+  function onPointerDown(e) {
+    // block mouse drags; allow touch/pen and only when allowed
+    if (!swipeAllowed() || e.pointerType === 'mouse') return;
+    dragging = true;
+    startX   = e.clientX;
+    dx       = 0;
     track.setPointerCapture(e.pointerId);
     track.style.transition = 'none';
-  });
-  track.addEventListener('pointermove', (e) => {
+  }
+
+  function onPointerMove(e) {
     if (!dragging) return;
     dx = e.clientX - startX;
     track.style.transform = `translateX(${(-index * slideW) + dx}px)`;
-  });
-  function endDrag() {
+  }
+
+  function onPointerUp() {
     if (!dragging) return;
     dragging = false;
     const threshold = Math.min(80, slideW * 0.15);
@@ -159,37 +172,62 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dx < -threshold && index < slides.length - 1) index++;
     goTo(index, true);
   }
-  track.addEventListener('pointerup', endDrag);
-  track.addEventListener('pointercancel', endDrag);
 
-  // Recalc on resize & when breakpoint flips
-  window.addEventListener('resize', () => { slideW = getSlideWidth(); goTo(index, false); });
-  mqMobile.addEventListener('change', () => { index = 0; setSizes(); });
+  function attachSwipe() {
+    if (swipeAttached) return;
+    track.addEventListener('pointerdown', onPointerDown);
+    track.addEventListener('pointermove', onPointerMove);
+    track.addEventListener('pointerup', onPointerUp);
+    track.addEventListener('pointercancel', onPointerUp);
+    swipeAttached = true;
+    track.style.cursor = 'grab';
+  }
 
+  function detachSwipe() {
+    if (!swipeAttached) return;
+    track.removeEventListener('pointerdown', onPointerDown);
+    track.removeEventListener('pointermove', onPointerMove);
+    track.removeEventListener('pointerup', onPointerUp);
+    track.removeEventListener('pointercancel', onPointerUp);
+    swipeAttached = false;
+    track.style.cursor = 'auto';
+  }
+
+  function updateSwipeBinding() {
+    if (swipeAllowed()) attachSwipe();
+    else detachSwipe();
+  }
+
+  // Recalc sizes & swipe binding on changes
+  window.addEventListener('resize', () => {
+    slideW = getSlideWidth();
+    goTo(index, false);
+    updateSwipeBinding();
+  });
+  mqMobile.addEventListener('change', () => { index = 0; setSizes(); updateSwipeBinding(); });
+  mqCoarse.addEventListener('change', updateSwipeBinding);
+
+  // init
   setSizes();
+  updateSwipeBinding();
 });
-
 
 function measureRightTxt() {
   document.querySelectorAll('.nav-links-right .right-txt').forEach(span => {
-    // temporarily reveal to measure true width without affecting layout
     const prev = { maxWidth: span.style.maxWidth, opacity: span.style.opacity };
     span.style.maxWidth = 'none';
     span.style.opacity = '1';
     span.style.position = 'absolute';
     span.style.visibility = 'hidden';
-
-    const w = span.scrollWidth;                // natural width in px
-
-    // restore then set CSS variable on the parent link
-    span.style.maxWidth = prev.maxWidth; 
+    const w = span.scrollWidth;
+    span.style.maxWidth = prev.maxWidth;
     span.style.opacity = prev.opacity;
     span.style.position = '';
     span.style.visibility = '';
-
     span.parentElement.style.setProperty('--w', w + 'px');
   });
 }
+
 
   // run on load and when fonts/zoom/layout change
   window.addEventListener('load', measureRightTxt);
