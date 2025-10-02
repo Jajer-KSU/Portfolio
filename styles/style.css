@@ -678,3 +678,5 @@ footer p {
   margin: 0 auto;
   max-width: 90%;
 }
+@media (hover: none) and (pointer: coarse) { .carousel-track { touch-action: pan-y; } }
+@media (hover: hover) and (pointer: fine)   { .carousel-track { touch-action: auto; } }
