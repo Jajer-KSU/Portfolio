@@ -6,7 +6,7 @@
         <title>Portfolio - Welcome</title>
         <script src="scripts/scripts.js" defer></script>
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" type="image/x-icon" href="/favi/portfolio.ico">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
@@ -53,8 +53,65 @@
         <main>
             <!-- TOP-->
             <div class="intro" id="intro">
-                <img src="imgs/me.jpg" alt="Jaydon Humphries" class="profile-pic">
-                <h1>Hey, I'm Jaydon Humphries &#128075;. Thank you for checking out my portfolio! Here you can find some more information about me, including a custom CTF challenge made by me for you to check out!</h2>
+                <img src="imgs/jaydonHumphries.jpg" alt="Jaydon Humphries" class="profile-pic">
+                <h1>Hey, I'm Jaydon Humphries &#128075;. Thank you for checking out my portfolio! Below are some of my projects, as well as some more information about me. </h2>
+            </div>
+            <!-- COURSEWORK & PROJECTS -->
+            <section class="coursework" id="coursework">
+            <h2>Coursework & Projects</h2>
+
+            <div class="carousel-container">
+                <!-- Left Arrow -->
+                <button class="arrow left" id="prev-btn">&#10094;</button>
+
+                <!-- Carousel Slides -->
+                <div class="carousel-track" id="carousel-track">
+                <div class="carousel-slide">
+                    <a href="https://jajer.dev/ctfchallenge.html" target="_blank" class="project-link">
+                    <div class="project">
+                        <img src="imgs/CTF.png" alt="CTF Challenge">
+                        <h3>CTF Challenge</h3>
+                        <p>Navigate through a simulated machine to obtain hidden flags. Made by me using jQuery Terminal.</p>
+                    </div>
+                    </a>
+                    <a href="https://github.com/Jajer-KSU/Hash-Matcher" target="_blank" class="project-link">
+                    <div class="project">
+                        <img src="imgs/Hash-Matcher.png" alt="Hash Matcher">
+                        <h3>Hash Matcher</h3>
+                        <p>Python script that takes a hashed file and compares it to a list of files to find a matching hash.</p>
+                    </div>
+                    </a>
+                    <a href="https://jajer-ksu.github.io/Evolution-of-HTTP/" target="_blank" class="project-link">
+                    <div class="project">
+                        <img src="imgs/Evolution.png" alt="Evolution of HTTP Website">
+                        <h3>Evolution of HTTP Website</h3>
+                        <p>Information regarding HTTP made into a website.</p>
+                    </div>
+                    </a>
+
+                    <a href="pdf/Firewall_Configuration_Best_Practices.pdf" target="_blank" class="project-link">
+                    <div class="project">
+                        <img src="imgs/Firewalls.png" alt="Firewall Configuration Best Practices">
+                        <h3>Firewall Configuration</h3>
+                        <p>Research paper discussing policy design and implementation</p>
+                    </div>
+                    </a>
+
+                </div>
+
+                <div class="carousel-slide">
+                    <a href="pdf/Project Charter.pdf" target="_blank" class="project-link">
+                    <div class="project">
+                        <img src="imgs/Project Charter.png" alt="Project Charter">
+                        <h3>AV Project Charter</h3>
+                        <p>Group-made project charter for an AV solution</p>
+                    </div>
+                    </a> 
+                </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <button class="arrow right" id="next-btn">&#10095;</button>
             </div>
             <!-- ABOUT ME -->
             <section class="about" id="aboutMe">
